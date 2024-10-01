@@ -1,13 +1,12 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Revista = void 0;
-const Publicacao_1 = require("./Publicacao");
-class Revista extends Publicacao_1.Publicacao {
-    constructor(id, titulo, ano, localizacao, editora, status) {
-        super(id, titulo, ano, localizacao, editora, status);
-    }
-    getInfo() {
-        return `Revista: ${this.titulo}, Editora: ${this.editora}, Status: ${this.status}`;
+const Publicacao_1 = __importDefault(require("./Publicacao"));
+class Revista extends Publicacao_1.default {
+    constructor(titulo, editora, ano, localizacao) {
+        super(titulo, ano, localizacao, editora);
     }
 }
-exports.Revista = Revista;
+exports.default = Revista;

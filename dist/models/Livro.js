@@ -1,17 +1,18 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Livro = void 0;
-const Publicacao_1 = require("./Publicacao");
-class Livro extends Publicacao_1.Publicacao {
-    constructor(id, titulo, ano, localizacao, editora, isbn, status) {
-        if (!isbn) {
-            throw new Error("O ISBN não pode ser vazio.");
+const Publicacao_1 = __importDefault(require("./Publicacao"));
+class Livro extends Publicacao_1.default {
+    constructor(titulo, autor, editora, isbn, ano, localizacao) {
+        super(titulo, ano, localizacao, editora);
+        const isbnStr = isbn.toString();
+        if (!isbn || isbnStr.length !== 13) {
+            throw new Error("ISBN é obrigatório e deve ter 13 caracteres");
         }
-        super(id, titulo, ano, localizacao, editora, status);
         this.isbn = isbn;
-    }
-    getInfo() {
-        return `Livro: ${this.titulo}, ISBN: ${this.isbn}, Status: ${this.status}`;
+        this.autor = autor;
     }
 }
-exports.Livro = Livro;
+exports.default = Livro;

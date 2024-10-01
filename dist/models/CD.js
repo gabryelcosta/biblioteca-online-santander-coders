@@ -1,17 +1,12 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CD = void 0;
-const ItemAcervo_1 = require("./ItemAcervo");
-class CD extends ItemAcervo_1.ItemAcervo {
-    constructor(id, titulo, ano, localizacao, duracao, status) {
-        if (duracao <= 0) {
-            throw new Error("A duração deve ser um valor positivo.");
-        }
-        super(id, titulo, ano, localizacao, status);
-        this.duracao = duracao;
-    }
-    getInfo() {
-        return `CD: ${this.titulo}, Duração: ${this.duracao} minutos, Status: ${this.status}`;
+const Midia_1 = __importDefault(require("./Midia"));
+class CD extends Midia_1.default {
+    constructor(titulo, ano, localizacao, duracao) {
+        super(titulo, ano, localizacao, duracao);
     }
 }
-exports.CD = CD;
+exports.default = CD;

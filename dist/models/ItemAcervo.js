@@ -1,25 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ItemAcervo = void 0;
+let currentId = 0;
 class ItemAcervo {
-    constructor(id, titulo, ano, localizacao, status) {
-        this.id = id;
+    constructor(titulo, ano, localizacao, disponibilidade = 'Disponivel') {
+        if (!titulo || !ano || !localizacao) {
+            throw new Error("Todos os campos são obrigatórios");
+        }
+        this.id = ++currentId;
         this.titulo = titulo;
         this.ano = ano;
         this.localizacao = localizacao;
-        this.status = status;
-        if (!titulo) {
-            throw new Error("O título não pode ser vazio.");
-        }
-        if (ano <= 0) {
-            throw new Error("O ano deve ser um valor positivo.");
-        }
-        if (!localizacao) {
-            throw new Error("A localização não pode ser vazia.");
-        }
-        if (!status) {
-            throw new Error("O status não pode ser vazio.");
-        }
+        this.disponibilidade = disponibilidade;
     }
 }
-exports.ItemAcervo = ItemAcervo;
+exports.default = ItemAcervo;

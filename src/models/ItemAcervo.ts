@@ -1,24 +1,33 @@
-export abstract class ItemAcervo {
-    constructor(
-        public id: number,
-        public titulo: string,
-        public ano: number,
-        public localizacao: string,
-        public status: string
-    ) {
-        if (!titulo) {
-            throw new Error("O título não pode ser vazio.");
-        }
-        if (ano <= 0) {
-            throw new Error("O ano deve ser um valor positivo.");
-        }
-        if (!localizacao) {
-            throw new Error("A localização não pode ser vazia.");
-        }
-        if (!status) {
-            throw new Error("O status não pode ser vazio.");
-        }
-    }
+import Localizavel from '../interfaces/Localizavel';
 
-    abstract getInfo(): string;
+let currentId = 0;
+
+type Disponibilidade = 'Disponivel' | 'Indisponivel' | 'Alugado' | 'Reservado';
+
+abstract class ItemAcervo implements Localizavel {
+    id: number;
+    titulo: string;
+    ano: number;
+    localizacao: string;
+    disponibilidade: Disponibilidade;
+
+    constructor(titulo: string, ano: number, localizacao: string, disponibilidade: Disponibilidade = 'Disponivel') {
+        if (!titulo || !ano || !localizacao) {
+            throw new Error("Todos os campos são obrigatórios");
+        }
+
+        const disponibilidadesPermitidas: Disponibilidade[] = ['Disponivel', 'Indisponivel', 'Alugado', 'Reservado'];
+        if (!disponibilidadesPermitidas.includes(disponibilidade)) {
+            throw new Error(`Disponibilidade inválida. Valores permitidos são: ${disponibilidadesPermitidas.join(', ')}`);
+        }
+
+        this.id = ++currentId;
+        this.titulo = titulo;
+        this.ano = ano;
+        this.localizacao = localizacao;
+        this.disponibilidade = disponibilidade;
+    }
 }
+
+export default ItemAcervo;
+export type { Disponibilidade };
